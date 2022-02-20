@@ -7,7 +7,7 @@ function stringLength(inputText, maxLength) {
     return true;
   }
   return false;
-};
+}
 stringLength('keksogram', 140);
 
 // Объявить функцию имя_функции(от, до);
@@ -27,7 +27,7 @@ function getInteger(minInt, maxInt) {
     return Math.floor(Math.random() * (minInt - maxInt + 1)) + maxInt; // Меняем местами
   }
   else {
-    console.log('Не может быть меньше нуля');
+    return 'Не может быть меньше нуля';
   }
-};
+}
 getInteger(-10, -2);
