@@ -34,14 +34,14 @@ function createComment() {
     message: 'В целом всё неплохо. Но не всё.',
     name: 'Вениамин',
   };
-};
+}
 
 const OBJ_COUNT = 25;
 
 // 2. Cоздать функцию, возвращающую случайный элемент массива, задействовав функцию function getInteger
 function getRandomArrayElement(elements) {
   return elements[getInteger(0, elements.length - 1)];
-};
+}
 
 
 // 3. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
@@ -53,7 +53,7 @@ function createPhoto(id) {
     likes: getInteger(15, 200),
     comments: createComment(),
   };
-};
+}
 
 // 4. Выполнить функцию
 function createPhotos() {
@@ -62,6 +62,6 @@ function createPhotos() {
     photos.push(createPhoto(i)); // записываем данные в массив
   }
   return photos;
-};
+}
 
 createPhotos();
