@@ -27,7 +27,7 @@ const DESCRIPTION = [
   'Мы открываем набор на #курс',
 ];
 
-function COMMENTS() {
+function createComment() {
   return {
     id: getInteger(1, 999),
     avatar: `img/avatar-${getInteger(1, 6)}.svg`,
@@ -38,23 +38,29 @@ function COMMENTS() {
 
 const OBJ_COUNT = 25;
 
-// 2. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
-const createPhoto = (id) => {
+// 2. Cоздать функцию, возвращающую случайный элемент массива, задействовав функцию function getInteger
+function getRandomArrayElement(elements) {
+  return elements[getInteger(0, elements.length - 1)];
+};
+
+
+// 3. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
+function createPhoto(id) {
   return {
     id,
     url: `photos/${getInteger(1, 25)}.jpg`,
-    description: DESCRIPTION[getInteger(0, 4)],
+    description: getRandomArrayElement(DESCRIPTION),
     likes: getInteger(15, 200),
-    comments: COMMENTS(),
+    comments: createComment(),
   };
 };
 
-// 3. Выполнить функцию
+// 4. Выполнить функцию
 function createPhotos() {
   const photos = [];
   for (let i = 0; i < OBJ_COUNT; i++) {
     photos.push(createPhoto(i)); // записываем данные в массив
-  };
+  }
   return photos;
 };
 
