@@ -1,9 +1,9 @@
-/* Функция нахождения длины строки
-const stringLength = (inputText, maxLength) => {
-    return inputText.length <= maxLength;
-}
-stringLength('keksogram', 140);
-*/
+// Функция нахождения длины строки
+// const stringLength = (inputText, maxLength) => {
+//     return inputText.length <= maxLength;
+// }
+// stringLength('keksogram', 140);
+
 
 // Функция генерации случайного числа из диапазона
 function getInteger(minInt, maxInt) {
@@ -18,66 +18,50 @@ function getInteger(minInt, maxInt) {
   return 'Не может быть меньше нуля';
 }
 
-// 1. Превратить данные в объект
-const RANDOM_ID = {
-  getInteger(1, 25);
-};
-
-const RANDOM_URL = {
-  'photos/' + getInteger(1, 25) + '.jpg';
-};
-
-const DESCRIPTION = {
+// 1. Перевести данные в объект
+const DESCRIPTION = [
   'Потрясающее времяпрепровождение на ближайшее время!',
   'Наконец-то могу в этом посте поделиться впечатлениями о путешествии',
   'Взял новую линзу для камеры, что скажете?',
   'Топ 10 приложений для обработки фотографий для профиля ниже',
   'Мы открываем набор на #курс',
-};
+];
 
-const LIKES = {
-  getInteger(15, 200);
-};
-
-const COMMENTS = {
-  id: getInteger(1, 999),
-  avatar: 'img/avatar-' + getInteger(1, 6) + '.svg',
-  message: 'В целом всё неплохо. Но не всё.',
-  name: 'Вениамин',
-};
-
-// 2. Написать функцию по созданию объекта
-const createObj = () => {
+const COMMENTS = () => {
   return {
-    RANDOM_ID,
-    RANDOM_URL,
-    DESCRIPTION,
-    LIKES,
-    COMMENTS,
-  };
-};
+    id: getInteger(1, 999),
+    avatar: `img/avatar-${getInteger(1, 6)}.svg`,
+    message: 'В целом всё неплохо. Но не всё.',
+    name: 'Вениамин',
+  }
+}
 
 const OBJ_COUNT = 25;
 
-// 3. Cоздать функцию, возвращающую случайный элемент массива, задействовав функцию function getInteger
+// 2. Cоздать функцию, возвращающую случайный элемент массива, задействовав функцию function getInteger
 const getRandomArrayElement = (elements) => {
   return elements[getInteger(0, elements.length - 1)];
 }
 
 
-// 4. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
-const createArray = () => {
+// 3. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
+const createPhoto = (id) => {
   return {
-    id: getRandomArrayElement(RANDOM_ID),
-    url: getRandomArrayElement(RANDOM_URL),
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomArrayElement(LIKES),
-    comments: getRandomArrayElement(COMMENTS),
-  };
+    id,
+    url: `photos/${getInteger(1, 25)}.jpg`,
+    description: DESCRIPTION[getInteger(0, 4)],
+    likes: getInteger(15, 200),
+    comments: COMMENTS(),
+  }
+}
+
+// 4. Выполнить функцию
+const createPhotos = () => {
+  const photos = [];
+  for (let i = 0; i < OBJ_COUNT; i++) {
+    photos.push(createPhoto(i)); // записываем данные в массив
+  }
+  return photos;
 };
 
-// 5. Генерируем сразу 25 объектов
-const similarObj = Array.from({length: OBJ_COUNT}, createArray); // создать массив длиной 25 из билдера createArray
-
-// 6. выполнить функцию
-console.log(similarObj);
+createPhotos();
