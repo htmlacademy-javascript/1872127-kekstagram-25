@@ -1,33 +1,67 @@
-// Объявить функцию имя_функции(проверяемая_строка, максимальная_длина);
-// Получить проверяемую_строку
-// Перевести ее в числовое значение
-// Сравнить его с максимально допустимой длиной
-function stringLength(inputText, maxLength) {
-  if (inputText.length <= maxLength) {
-    return true;
-  }
-  return false;
-}
-stringLength('keksogram', 140);
+// Функция нахождения длины строки
+// const stringLength = (inputText, maxLength) => {
+//     return inputText.length <= maxLength;
+// }
+// stringLength('keksogram', 140);
 
-// Объявить функцию имя_функции(от, до);
-// Результат: целое число из диапазона "от...до"
-// Задать цикл, проверяющий соответствие диапазону
-// Привести значения к целым числам через Math.floor (минимум для минимального) и Math.ceil (максимум для максимального)
-// Частью воспользовался из: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
+// Функция генерации случайного числа из диапазона
 function getInteger(minInt, maxInt) {
-  if (minInt >= 0 && minInt < maxInt) {
-    minInt = Math.ceil(minInt);
-    maxInt = Math.floor(maxInt);
-    return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
-  }
-  if (minInt >= 0 && minInt > maxInt) {
-    minInt = Math.ceil(minInt);
-    maxInt = Math.floor(maxInt);
+  if (minInt >= 0) {
+    if (minInt < maxInt) {
+      minInt = Math.ceil(minInt);
+      maxInt = Math.floor(maxInt);
+      return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
+    }
     return Math.floor(Math.random() * (minInt - maxInt + 1)) + maxInt; // Меняем местами
   }
-  else {
-    return 'Не может быть меньше нуля';
-  }
+  return 'Не может быть меньше нуля';
 }
-getInteger(-10, -2);
+
+// 1. Перевести данные в объект
+const DESCRIPTION = [
+  'Потрясающее времяпрепровождение на ближайшее время!',
+  'Наконец-то могу в этом посте поделиться впечатлениями о путешествии',
+  'Взял новую линзу для камеры, что скажете?',
+  'Топ 10 приложений для обработки фотографий для профиля ниже',
+  'Мы открываем набор на #курс',
+];
+
+function createComment() {
+  return {
+    id: getInteger(1, 999),
+    avatar: `img/avatar-${getInteger(1, 6)}.svg`,
+    message: 'В целом всё неплохо. Но не всё.',
+    name: 'Вениамин',
+  };
+}
+
+const OBJ_COUNT = 25;
+
+// 2. Cоздать функцию, возвращающую случайный элемент массива, задействовав функцию function getInteger
+function getRandomArrayElement(elements) {
+  return elements[getInteger(0, elements.length - 1)];
+}
+
+
+// 3. Задействовать функцию function getRandomArrayElement и создать объект по созданию комментария:
+function createPhoto(id) {
+  return {
+    id,
+    url: `photos/${getInteger(1, 25)}.jpg`,
+    description: getRandomArrayElement(DESCRIPTION),
+    likes: getInteger(15, 200),
+    comments: createComment(),
+  };
+}
+
+// 4. Выполнить функцию
+function createPhotos() {
+  const photos = [];
+  for (let i = 0; i < OBJ_COUNT; i++) {
+    photos.push(createPhoto(i)); // записываем данные в массив
+  }
+  return photos;
+}
+
+createPhotos();
