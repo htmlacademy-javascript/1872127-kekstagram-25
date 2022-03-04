@@ -14,7 +14,7 @@ const createComment = () => ({
   avatar: `img/avatar-${getInteger(1, 6)}.svg`,
   message: 'В целом всё неплохо. Но не всё.',
   name: 'Вениамин',
-})
+});
 
 const OBJ_COUNT = 25;
 
@@ -24,7 +24,7 @@ const createPhoto = (id) => ({
   description: getRandomArrayElement(DESCRIPTION),
   likes: getInteger(15, 200),
   comments: createComment(),
-})
+});
 
 function createPhotos() {
   const photos = [];
