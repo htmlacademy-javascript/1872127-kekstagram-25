@@ -34,4 +34,5 @@ function createPhotos() {
   return photos;
 }
 
+export {createPhoto};
 export {createPhotos};
