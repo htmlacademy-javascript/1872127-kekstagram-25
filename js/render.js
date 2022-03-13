@@ -1,19 +1,18 @@
 const photoTemplate = document.body.querySelector('#picture').content; // записываем в переменную содержимое шаблона, который будем копировать
 const photoBox = document.body.querySelector('.pictures'); // записываем в переменную контейнер, в который будем вставлять фото др. пользователей
 
-const renderPhoto = (photoElement) => {
-  photoElement = photoTemplate.cloneNode(true); // копируем шаблон и отрисовываем его в контейнере
-  photoBox.appendChild(photoElement); // отрисуем шаблон в контейнере для фотографий пользователей
-  photoElement.querySelector('.picture__img').src = photoElement.url; // получаем данные 
-  photoElement.querySelector('.picture__likes').textContent = photoElement.likes; // то же 
-  photoElement.querySelector('.picture__comments').textContent = photoElement.comments.length; // то же
+const renderPhoto = (photo) => {
+  const photoElement = photoTemplate.cloneNode(true); // копируем шаблон и отрисовываем его в контейнере
+  photoElement.querySelector('.picture__img').src = photo.url; // получаем данные 
+  photoElement.querySelector('.picture__likes').textContent = photo.likes; // то же 
+  photoElement.querySelector('.picture__comments').textContent = photo.comments.length; // то же
   return photoElement;
 };
 
 const renderPhotos = (photos) => {
-  photoBox.querySelectorAll('.picture').forEach((element) => element.remove());
-  photoBox.append(photos.map(renderPhoto));
-  return photos;
+  photos.forEach((item) => {
+    photoBox.append(renderPhoto(item))
+  });
 };
 
 export {renderPhotos};
