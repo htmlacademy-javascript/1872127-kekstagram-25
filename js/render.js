@@ -1,18 +1,40 @@
-const photoTemplate = document.body.querySelector('#picture').content; // записываем в переменную содержимое шаблона, который будем копировать
-const photoBox = document.body.querySelector('.pictures'); // записываем в переменную контейнер, в который будем вставлять фото др. пользователей
+const photoTemplate = document.body.querySelector('#picture').content;
+const photoBox = document.body.querySelector('.pictures');
 
 const renderPhoto = (photo) => {
-  const photoElement = photoTemplate.cloneNode(true); // копируем шаблон и отрисовываем его в контейнере
-  photoElement.querySelector('.picture__img').src = photo.url; // получаем данные 
-  photoElement.querySelector('.picture__likes').textContent = photo.likes; // то же 
-  photoElement.querySelector('.picture__comments').textContent = photo.comments.length; // то же
+  const photoElement = photoTemplate.cloneNode(true);
+  photoElement.querySelector('.picture__img').src = photo.url;
+  photoElement.querySelector('.picture__likes').textContent = photo.likes;
+  photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
   return photoElement;
 };
 
+const photoFragment = document.createDocumentFragment();
+
 const renderPhotos = (photos) => {
   photos.forEach((item) => {
-    photoBox.append(renderPhoto(item))
+    photoFragment.appendChild(renderPhoto(item));
+    photoBox.append(photoFragment);
   });
 };
 
 export {renderPhotos};
+
+// const photoTemplate = document.body.querySelector('#picture').content;
+// const photoBox = document.body.querySelector('.pictures');
+
+// const renderPhoto = (photo) => {
+//   const photoElement = photoTemplate.cloneNode(true);
+//   photoElement.querySelector('.picture__img').src = photo.url;
+//   photoElement.querySelector('.picture__likes').textContent = photo.likes;
+//   photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+//   return photoElement;
+// };
+
+// const renderPhotos = (photos) => {
+//   photos.forEach((item) => {
+//     photoBox.append(renderPhoto(item));
+//   });
+// };
+
+// export {renderPhotos};
