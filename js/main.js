@@ -1,6 +1,7 @@
 import {createPhotos} from './data.js';
-
-createPhotos();
+import {renderPhotos} from './render.js';
+const photos = createPhotos();
+renderPhotos(photos);
 
 // // импорт модуля для консоли браузера
 // import('/js/data.js').then((m) => dataModule = m);
