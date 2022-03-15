@@ -1,19 +1,40 @@
-const photoTemplate = document.body.querySelector('#picture').content; // записываем в переменную содержимое шаблона, который будем копировать
-const photoBox = document.body.querySelector('.pictures'); // записываем в переменную контейнер, в который будем вставлять фото др. пользователей
+const photoTemplate = document.body.querySelector('#picture').content;
+const photoBox = document.body.querySelector('.pictures');
 
-const renderPhoto = (photoElement) => {
-  photoElement = photoTemplate.cloneNode(true); // копируем шаблон и отрисовываем его в контейнере
-  photoBox.appendChild(photoElement); // отрисуем шаблон в контейнере для фотографий пользователей
-  photoElement.querySelector('.picture__img').src = photoElement.url; // получаем данные 
-  photoElement.querySelector('.picture__likes').textContent = photoElement.likes; // то же 
-  photoElement.querySelector('.picture__comments').textContent = photoElement.comments.length; // то же
+const renderPhoto = (photo) => {
+  const photoElement = photoTemplate.cloneNode(true);
+  photoElement.querySelector('.picture__img').src = photo.url;
+  photoElement.querySelector('.picture__likes').textContent = photo.likes;
+  photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
   return photoElement;
 };
 
+const photoFragment = document.createDocumentFragment();
+
 const renderPhotos = (photos) => {
-  photoBox.querySelectorAll('.picture').forEach((element) => element.remove());
-  photoBox.append(photos.map(renderPhoto));
-  return photos;
+  photos.forEach((item) => {
+    photoFragment.appendChild(renderPhoto(item));
+    photoBox.append(photoFragment);
+  });
 };
 
 export {renderPhotos};
+
+// const photoTemplate = document.body.querySelector('#picture').content;
+// const photoBox = document.body.querySelector('.pictures');
+
+// const renderPhoto = (photo) => {
+//   const photoElement = photoTemplate.cloneNode(true);
+//   photoElement.querySelector('.picture__img').src = photo.url;
+//   photoElement.querySelector('.picture__likes').textContent = photo.likes;
+//   photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+//   return photoElement;
+// };
+
+// const renderPhotos = (photos) => {
+//   photos.forEach((item) => {
+//     photoBox.append(renderPhoto(item));
+//   });
+// };
+
+// export {renderPhotos};

@@ -9,12 +9,12 @@ const DESCRIPTION = [
   'Мы открываем набор на #курс',
 ];
 
-const createComment = () => ({
+const createComment = () => ([{
   id: getInteger(1, 999),
   avatar: `img/avatar-${getInteger(1, 6)}.svg`,
   message: 'В целом всё неплохо. Но не всё.',
   name: 'Вениамин',
-});
+}]);
 
 const OBJ_COUNT = 25;
 
