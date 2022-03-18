@@ -29,7 +29,7 @@ const createPhoto = (id) => ({
 function createPhotos() {
   const photos = [];
   for (let i = 0; i < OBJ_COUNT; i++) {
-    photos.push(createPhoto(i)); // записываем данные в массив
+    photos.push(createPhoto(i));
   }
   return photos;
 }

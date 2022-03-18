@@ -16,8 +16,15 @@ function getRandomArrayElement(elements) {
   return elements[getInteger(0, elements.length - 1)];
 }
 
-export {getInteger};
-export {getRandomArrayElement};
+const isEscapeKey = (evt) => {
+  return evt.key === 'Escape';
+};
+
+const isEnterKey = (evt) => {
+  return evt.key === 'Enter';
+};
+
+export {getInteger, getRandomArrayElement, isEscapeKey, isEnterKey};
 
 // Функция нахождения длины строки
 // const stringLength = (inputText, maxLength) => {

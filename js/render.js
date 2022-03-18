@@ -18,4 +18,8 @@ const renderPhotos = (photos) => {
   photoBox.appendChild(photoFragment);
 };
 
-export {renderPhotos};
+const clearPhotos = () => {
+  photoBox.innerHTML = '';
+};
+
+export {renderPhotos, clearPhotos};
