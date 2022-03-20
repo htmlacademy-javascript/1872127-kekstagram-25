@@ -16,13 +16,13 @@ function getRandomArrayElement(elements) {
   return elements[getInteger(0, elements.length - 1)];
 }
 
-const isEscapeKey = (evt) => {
+function isEscapeKey(evt) {
   return evt.key === 'Escape';
-};
+}
 
-const isEnterKey = (evt) => {
+function isEnterKey (evt) {
   return evt.key === 'Enter';
-};
+}
 
 export {getInteger, getRandomArrayElement, isEscapeKey, isEnterKey};
 
