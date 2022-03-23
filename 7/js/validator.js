@@ -5,37 +5,41 @@ const pristine = new Pristine(form, {
   errorClass: 'img-upload__text--invalid',
   successClass: 'img-upload__text--valid',
   errorTextParent: 'img-upload__text',
-  errorTextTag: 'span',
+  errorTextTag: 'div',
   errorTextClass: 'img-upload__error'
 });
 
+const MAX_TAGS = 5;
+
 function validateHashtag (value) {
-  return value.length >=2 && value.length <= 20;
+  return value.trim().toLowerCase().split(/\s+/).length <= MAX_TAGS;
 }
 
-pristine.addValidator(
-  form.querySelector('.text__hashtags'),
-  validateHashtag,
-  'От 2 до 20 символов, включая #'
-);
+const initUploadWindow = () => {
+  pristine.addValidator(
+    form.querySelector('.text__hashtags'),
+    validateHashtag(),
+    'Не более пяти хэш-тегов'
+  );
 
-const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
+  const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
 
-pristine.addValidator(
-  form.querySelector('.text__hashtags'),
-  ruleHashtag,
-  'Хэш-тег должн состоять только из букв и чисел'
-);
+  pristine.addValidator(
+    form.querySelector('.text__hashtags'),
+    (value) => {
+      const tags = value.trim().toLowerCase().split(/\s+/);
+      if (!ruleHashtag.test(tags)) {
+        return false;
+      }
+      return true;
+    }
+  );
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
-// добавить условия
-//  - нечувствительный регистр
-// - разделение пробелами /s?
-// - нельзя использовать одинаковые хештеги (цикл?)
-// - не более 5 хештегов
-// - если фокус находится в поле ввода хэш-тега,
-// нажатие на Esc не должно приводить к закрытию формы
-// редактирования изображения. (tabindex? evt.preventDefault()?)
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    pristine.validate();
+  }
+  );
+};
+
+export {initUploadWindow};

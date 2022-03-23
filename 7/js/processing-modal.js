@@ -1,4 +1,4 @@
-import {isEscapeKey, isEnterKey} from './util';
+import {isEscapeKey, isEnterKey} from './util.js';
 import {renderPhotos, clearPhotos} from './render.js';
 const pageBody = document.querySelector('body');
 const photoProcessing = document.querySelector('.img-upload__overlay');
@@ -31,7 +31,7 @@ function closePhotoModal () {
 
 const modalPhotos = () => {
   // обработчик открытия:
-  photoProcessingOpen.addEventListener('click', () => {
+  photoProcessingOpen.addEventListener('change', () => {
     openPhotoModal();
   });
 
