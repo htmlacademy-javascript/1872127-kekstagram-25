@@ -29,7 +29,7 @@ const initUploadWindow = () => {
     (value) => {
       const tags = value.trim().toLowerCase().split(/\s+/);
       if (!ruleHashtag.test(tags)) {
-        return false;
+        return 'Используйте только буквы и цифры';
       }
       return true;
     }
