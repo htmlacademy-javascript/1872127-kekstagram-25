@@ -11,35 +11,39 @@ const pristine = new Pristine(form, {
 
 const MAX_TAGS = 5;
 
-function validateHashtag (value) {
-  return value.trim().toLowerCase().split(/\s+/).length <= MAX_TAGS;
-}
+const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
+
+const validateHashtag = (value) =>
+  value.trim().toLowerCase().split(/\s+/).length <= MAX_TAGS;
+
+const makeEqual = (value) => {
+  const tags = value.trim().toLowerCase().split(/\s+/);
+  for (const tag of tags) {
+    if (!ruleHashtag.test(tag)) {
+      return false;
+    }
+  }
+  return true;
+};
 
 const initUploadWindow = () => {
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
-    validateHashtag(),
+    validateHashtag,
     'Не более пяти хэш-тегов'
   );
 
-  const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
-
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
-    (value) => {
-      const tags = value.trim().toLowerCase().split(/\s+/);
-      if (!ruleHashtag.test(tags)) {
-        return false;
-      }
-      return true;
-    }
+    makeEqual,
+    'Используйте только буквы и цифры'
   );
 
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    evt.stopPropagation();
     pristine.validate();
-  }
-  );
+  });
 };
 
 export {initUploadWindow};
