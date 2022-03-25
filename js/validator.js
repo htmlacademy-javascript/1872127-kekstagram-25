@@ -16,7 +16,7 @@ const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
 const validateHashtag = (value) =>
   value.trim().toLowerCase().split(/\s+/).length <= MAX_TAGS;
 
-const makeEqual = (value) => {
+const makeSameRegister = (value) => {
   const tags = value.trim().toLowerCase().split(/\s+/);
   for (const tag of tags) {
     if (!ruleHashtag.test(tag)) {
@@ -35,7 +35,7 @@ const initUploadWindow = () => {
 
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
-    makeEqual,
+    makeSameRegister,
     'Используйте только буквы и цифры'
   );
 
