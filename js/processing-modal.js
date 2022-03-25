@@ -1,5 +1,4 @@
 import {isEscapeKey, isEnterKey} from './util.js';
-import {clearPhotos} from './render.js';
 const pageBody = document.querySelector('body');
 const photoProcessing = document.querySelector('.img-upload__overlay');
 const photoProcessingOpen = document.querySelector('#upload-file');
@@ -23,7 +22,6 @@ function openPhotoModal () {
 function closePhotoModal () {
   photoProcessing.classList.add('hidden');
   pageBody.classList.remove('modal-open');
-  clearPhotos();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
@@ -43,14 +41,7 @@ const modalPhotos = () => {
 
   // обработчик закрытия:
   photoProcessingClose.addEventListener('click', () => {
-    openPhotoModal();
-  });
-
-  // обработчик закрытия при нажатии ENTER
-  photoProcessingClose.addEventListener('keydown', (evt) => {
-    if (isEnterKey(evt)) {
-      openPhotoModal();
-    }
+    closePhotoModal();
   });
 };
 
