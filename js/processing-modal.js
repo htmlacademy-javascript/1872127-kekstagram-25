@@ -26,7 +26,7 @@ function closePhotoModal () {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-const modalPhotos = () => {
+const renderModalPhotos = () => {
   // обработчик открытия:
   photoProcessingOpen.addEventListener('change', () => {
     openPhotoModal();
@@ -45,4 +45,4 @@ const modalPhotos = () => {
   });
 };
 
-export {modalPhotos};
+export {renderModalPhotos};
