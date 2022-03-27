@@ -45,4 +45,4 @@ const renderModalPhotos = () => {
   });
 };
 
-export {renderModalPhotos};
+export {renderModalPhotos, onPopupEscKeydown};

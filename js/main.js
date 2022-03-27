@@ -1,11 +1,8 @@
-import {createPhotos, createComment} from './data.js';
+import {createPhotos} from './data.js';
 import {renderPhotos} from './render.js';
-import {openFullscreenPhoto} from './fullscreen-photo.js';
 import {renderModalPhotos} from './processing-modal.js';
 import {initUploadWindow} from './validator.js';
 const photos = createPhotos();
 renderPhotos(photos);
-const photo = createComment();
-openFullscreenPhoto(photo);
 renderModalPhotos();
 initUploadWindow();
