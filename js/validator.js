@@ -13,10 +13,10 @@ const MAX_TAGS = 5;
 
 const ruleHashtag = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}$/;
 
-const validateHashtag = (value) =>
+const validateTagsQuantity = (value) =>
   value.trim().toLowerCase().split(/\s+/).length <= MAX_TAGS;
 
-const makeEqual = (value) => {
+const validateHashtag = (value) => {
   const tags = value.trim().toLowerCase().split(/\s+/);
   for (const tag of tags) {
     if (!ruleHashtag.test(tag)) {
@@ -29,13 +29,13 @@ const makeEqual = (value) => {
 const initUploadWindow = () => {
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
-    validateHashtag,
+    validateTagsQuantity,
     'Не более пяти хэш-тегов'
   );
 
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
-    makeEqual,
+    validateHashtag,
     'Используйте только буквы и цифры'
   );
 
