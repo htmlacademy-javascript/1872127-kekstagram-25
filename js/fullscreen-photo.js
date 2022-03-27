@@ -29,6 +29,7 @@ const openFullscreenPhoto = (photo) => {
   bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
   bigPicture.querySelector('.social__caption').textContent = photo.description;
   bigPicture.classList.remove('hidden');
+  commentsList.innerHTML='';
   commentsList.append(...photo.comments.map(renderCommentAuthor));
   bigPicture.querySelector('.big-picture__cancel').addEventListener('click', () => {
     closeFullscreenPhoto();
