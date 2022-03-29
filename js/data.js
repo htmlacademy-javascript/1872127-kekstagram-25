@@ -16,6 +16,14 @@ const createComment = () => ([{
   name: 'Вениамин',
 }]);
 
+function createComments() {
+  const comment = [];
+  for (let i = 0; i < getInteger(1, 15); i++) {
+    comment.push(createComment(i));
+  }
+  return comment;
+}
+
 const OBJ_COUNT = 25;
 
 const createPhoto = (id) => ({
@@ -23,7 +31,7 @@ const createPhoto = (id) => ({
   url: `photos/${getInteger(1, 25)}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getInteger(15, 200),
-  comments: createComment(),
+  comments: createComments(),
 });
 
 function createPhotos() {
@@ -34,6 +42,4 @@ function createPhotos() {
   return photos;
 }
 
-export {createComment};
-export {createPhoto};
 export {createPhotos};
