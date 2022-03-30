@@ -9,8 +9,6 @@ const renderPhoto = (photo) => {
   photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
   photoElement.addEventListener('click', () => {
     openFullscreenPhoto(photo);
-    document.querySelector('.social__comment-count').classList.add('hidden');
-    document.querySelector('.comments-loader').classList.add('hidden');
     document.body.classList.add('modal-open');
   });//функция открытия модального окна фото(объект информации с фотографии
   return photoElement;

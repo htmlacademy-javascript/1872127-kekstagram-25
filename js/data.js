@@ -9,16 +9,16 @@ const DESCRIPTION = [
   'Мы открываем набор на #курс',
 ];
 
-const createComment = () => ([{
+const createComment = () => ({
   id: getInteger(1, 999),
   avatar: `img/avatar-${getInteger(1, 6)}.svg`,
   message: 'В целом всё неплохо. Но не всё.',
   name: 'Вениамин',
-}]);
+});
 
 function createComments() {
   const comment = [];
-  for (let i = 0; i < getInteger(1, 15); i++) {
+  for (let i = 0; i < getInteger(1, 12); i++) {
     comment.push(createComment(i));
   }
   return comment;
