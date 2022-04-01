@@ -5,12 +5,14 @@ const imgUpload = document.querySelector('.img-upload__preview');
 const effectControls = document.querySelectorAll('.effects__radio');
 effectControls.forEach((effectControl) => effectControl.addEventListener('change', changeEffectHandler));
 
-const effectNone = document.querySelector('#effect-none');
-const effectChrome = document.querySelector('#effect-chrome');
-const effectSepia = document.querySelector('#effect-sepia');
-const effectMarvin = document.querySelector('#effect-marvin');
-const effectPhobos = document.querySelector('#effect-phobos');
-const effectHeat = document.querySelector('#effect-heat');
+const getEffect = effectControls.getElementById(`effect-${evt.target.value}`);
+// const effectNone = document.querySelector('#effect-none');
+// const effectChrome = document.querySelector('#effect-chrome');
+// const effectSepia = document.querySelector('#effect-sepia');
+// const effectMarvin = document.querySelector('#effect-marvin');
+// const effectPhobos = document.querySelector('#effect-phobos');
+// const effectHeat = document.querySelector('#effect-heat');
+const effectName = getEffect.value;
 
 valueElement.value = 100;
 
@@ -113,63 +115,75 @@ const effectNames = {
     },
   },
 };
-// Эффект Оригинал
-effectNone.changeEffectHandler = (evt) => {
+
+// к переменной применяем обработчик события
+// если она выбрана
+// то добавляем imgUpload модификатор
+// подстраиваем под него слайдер
+getEffect.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'none'}`;
+    imgUpload.classList = `img-upload__preview effects__preview--${effectNames[effectName]}`;
     sliderElement.noUiSlider.updateOptions(evt.target.value);
   }
 };
 
-// Эффект Хром
-effectChrome.changeEffectHandler = (evt) => {
-  if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'chrome'}`;
-    sliderElement.noUiSlider.updateOptions(
-      effectNames[evt.target.value]
-    );
-  }
-};
+// // Эффект Оригинал
+// effectNone.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'none'}`;
+//     sliderElement.noUiSlider.updateOptions(evt.target.value);
+//   }
+// };
 
-// Эффект Сепия
-effectSepia.changeEffectHandler = (evt) => {
-  if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'sepia'}`;
-    sliderElement.noUiSlider.updateOptions(
-      effectNames[evt.target.value]
-    );
-  }
-};
+// // Эффект Хром
+// effectChrome.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'chrome'}`;
+//     sliderElement.noUiSlider.updateOptions(
+//       effectNames[evt.target.value]
+//     );
+//   }
+// };
 
-// Эффект Марвин
-effectMarvin.changeEffectHandler = (evt) => {
-  if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'marvin'}`;
-    sliderElement.noUiSlider.updateOptions(
-      effectNames[evt.target.value]
-    );
-  }
-};
+// // Эффект Сепия
+// effectSepia.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'sepia'}`;
+//     sliderElement.noUiSlider.updateOptions(
+//       effectNames[evt.target.value]
+//     );
+//   }
+// };
 
-// Эффект Фобос
-effectPhobos.changeEffectHandler = (evt) => {
-  if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'phobos'}`;
-    sliderElement.noUiSlider.updateOptions(
-      effectNames[evt.target.value]
-    );
-  }
-};
+// // Эффект Марвин
+// effectMarvin.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'marvin'}`;
+//     sliderElement.noUiSlider.updateOptions(
+//       effectNames[evt.target.value]
+//     );
+//   }
+// };
 
-// Эффект Зной
-effectHeat.changeEffectHandler = (evt) => {
-  if (evt.target.checked) {
-    imgUpload.classList = `img-upload__preview effects__preview--${'heat'}`;
-    sliderElement.noUiSlider.updateOptions(
-      effectNames[evt.target.value]
-    );
-  }
-};
+// // Эффект Фобос
+// effectPhobos.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'phobos'}`;
+//     sliderElement.noUiSlider.updateOptions(
+//       effectNames[evt.target.value]
+//     );
+//   }
+// };
+
+// // Эффект Зной
+// effectHeat.changeEffectHandler = (evt) => {
+//   if (evt.target.checked) {
+//     imgUpload.classList = `img-upload__preview effects__preview--${'heat'}`;
+//     sliderElement.noUiSlider.updateOptions(
+//       effectNames[evt.target.value]
+//     );
+//   }
+// };
 
 // Может пригодиться:
 // sliderElement.setAttribute('disabled', true); отключение слайдера
