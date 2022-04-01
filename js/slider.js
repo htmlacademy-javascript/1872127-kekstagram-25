@@ -2,6 +2,9 @@ const sliderElement = document.querySelector('.effect-level__slider'); // зап
 const valueElement = document.querySelector('.effect-level__value');
 const imgUpload = document.querySelector('.img-upload__preview');
 
+const effectControls = document.querySelectorAll('.effects__radio');
+effectControls.forEach((effectControl) => effectControl.addEventListener('change', changeEffectHandler));
+
 const effectNone = document.querySelector('#effect-none');
 const effectChrome = document.querySelector('#effect-chrome');
 const effectSepia = document.querySelector('#effect-sepia');
@@ -111,89 +114,62 @@ const effectNames = {
   },
 };
 // Эффект Оригинал
-effectNone.addEventListener('change', (evt) => {
+effectNone.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
-    );
+    imgUpload.classList = `img-upload__preview effects__preview--${'none'}`;
+    sliderElement.noUiSlider.updateOptions(evt.target.value);
   }
-});
+};
+
 // Эффект Хром
-effectChrome.addEventListener('change', (evt) => {
+effectChrome.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('effects__preview--chrome');
+    imgUpload.classList = `img-upload__preview effects__preview--${'chrome'}`;
     sliderElement.noUiSlider.updateOptions(
-      effectNames['chrome'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('effects__preview--chrome');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
+      effectNames[evt.target.value]
     );
   }
-});
+};
+
 // Эффект Сепия
-effectSepia.addEventListener('change', (evt) => {
+effectSepia.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('effects__preview--sepia');
+    imgUpload.classList = `img-upload__preview effects__preview--${'sepia'}`;
     sliderElement.noUiSlider.updateOptions(
-      effectNames['sepia'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('effects__preview--sepia');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
+      effectNames[evt.target.value]
     );
   }
-});
+};
+
 // Эффект Марвин
-effectMarvin.addEventListener('change', (evt) => {
+effectMarvin.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('effects__preview--marvin');
+    imgUpload.classList = `img-upload__preview effects__preview--${'marvin'}`;
     sliderElement.noUiSlider.updateOptions(
-      effectNames['marvin'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('effects__preview--marvin');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
+      effectNames[evt.target.value]
     );
   }
-});
+};
+
 // Эффект Фобос
-effectPhobos.addEventListener('change', (evt) => {
+effectPhobos.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('effects__preview--phobos');
+    imgUpload.classList = `img-upload__preview effects__preview--${'phobos'}`;
     sliderElement.noUiSlider.updateOptions(
-      effectNames['phobos'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('effects__preview--phobos');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
+      effectNames[evt.target.value]
     );
   }
-});
+};
+
 // Эффект Зной
-effectHeat.addEventListener('change', (evt) => {
+effectHeat.changeEffectHandler = (evt) => {
   if (evt.target.checked) {
-    imgUpload.input.classList.add('effects__preview--heat');
+    imgUpload.classList = `img-upload__preview effects__preview--${'heat'}`;
     sliderElement.noUiSlider.updateOptions(
-      effectNames['heat'].options
-    );
-  } else {
-    imgUpload.input.classList.remove('effects__preview--heat');
-    sliderElement.noUiSlider.updateOptions(
-      effectNames['none'].options
+      effectNames[evt.target.value]
     );
   }
-});
+};
 
 // Может пригодиться:
 // sliderElement.setAttribute('disabled', true); отключение слайдера
