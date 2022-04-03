@@ -10,7 +10,7 @@ const renderPhoto = (photo) => {
   photoElement.addEventListener('click', () => {
     openFullscreenPhoto(photo);
     document.body.classList.add('modal-open');
-  });//функция открытия модального окна фото(объект информации с фотографии
+  });
   return photoElement;
 };
 
