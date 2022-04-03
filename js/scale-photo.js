@@ -9,26 +9,26 @@ const SCALE_STEP = 0.25;
 const SCALE_DEFAULT = 100;
 
 const runDefaultScale = () => {
-  controlValue.value = SCALE_DEFAULT;
+  controlValue.value = `${SCALE_DEFAULT}%`;
   imgUploadPreview.style.transform = 'scale(1)';
 };
 
 controlSmaller.addEventListener('click', () => {
-  controlValue.value.replace('%', '');
-  if ((Number(controlValue.value) / 100) != SCALE_MIN) {
-    const amount = controlValue.value / 100 - SCALE_STEP;
+  const value = Number(controlValue.value.replace('%', ''));
+  if ((value / 100) !== SCALE_MIN) {
+    const amount = value / 100 - SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${amount})`;
-    controlValue.value = amount * 100;
-  };
+    controlValue.value = `${amount * 100}%`;
+  }
 });
 
 controlBigger.addEventListener('click', () => {
-  controlValue.value.replace('%', '');
-  if ((Number(controlValue.value) / 100) != SCALE_MAX) {
-    const amount = controlValue.value / 100 + SCALE_STEP;
+  const value = Number(controlValue.value.replace('%', ''));
+  if ((value / 100) !== SCALE_MAX) {
+    const amount = value / 100 + SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${amount})`;
-    controlValue.value = amount * 100;
-  };
+    controlValue.value = `${amount * 100}%`;
+  }
 });
 
 export {runDefaultScale};
