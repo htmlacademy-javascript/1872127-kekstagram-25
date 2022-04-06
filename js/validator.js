@@ -1,4 +1,8 @@
+import {showAlert} from './util.js';
+import {sendData} from './api.js';
+
 const form = document.querySelector('.img-upload__form');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -8,6 +12,16 @@ const pristine = new Pristine(form, {
   errorTextTag: 'div',
   errorTextClass: 'img-upload__error'
 });
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Отправить';
+};
 
 const MAX_TAGS = 5;
 
@@ -26,7 +40,7 @@ const validateHashtag = (value) => {
   return true;
 };
 
-const initUploadWindow = () => {
+const initUploadWindow = (onSuccess) => {
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
     validateTagsQuantity,
@@ -42,7 +56,21 @@ const initUploadWindow = () => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     evt.stopPropagation();
-    pristine.validate();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+    }
   });
 };
 

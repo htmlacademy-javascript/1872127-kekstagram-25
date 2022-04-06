@@ -1,5 +1,5 @@
 import {isEscapeKey, isEnterKey} from './util.js';
-import { runDefaultScale } from './scale-photo.js';
+import {runDefaultScale} from './scale-photo.js';
 const pageBody = document.querySelector('body');
 const photoProcessing = document.querySelector('.img-upload__overlay');
 const photoProcessingOpen = document.querySelector('#upload-file');
@@ -48,4 +48,4 @@ const renderModalPhotos = () => {
   });
 };
 
-export {renderModalPhotos, onPopupEscKeydown};
+export {renderModalPhotos, onPopupEscKeydown, closePhotoModal};
