@@ -1,8 +1,11 @@
-import {showAlert} from './util.js';
+// import {showAlert} from './util.js';
 import {sendData} from './api.js';
+import {closePhotoModal} from './processing-modal.js';
 
 const form = document.querySelector('.img-upload__form');
 const submitButton = document.querySelector('.img-upload__submit');
+const successTemplate = document.querySelector('#success').content;
+const errorTemplate = document.querySelector('#error').content;
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -40,7 +43,7 @@ const validateHashtag = (value) => {
   return true;
 };
 
-const initUploadWindow = (onSuccess) => {
+const initUploadWindow = (onSuccess, onFail) => {
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
     validateTagsQuantity,
@@ -61,11 +64,17 @@ const initUploadWindow = (onSuccess) => {
       blockSubmitButton();
       sendData(
         () => {
-          onSuccess();
+          onSuccess(() => {
+            successTemplate.cloneNode(true);
+            closePhotoModal();
+          });
           unblockSubmitButton();
         },
         () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          onFail(() => {
+            errorTemplate.cloneNode(true);
+            closePhotoModal();
+          });
           unblockSubmitButton();
         },
         new FormData(evt.target),
