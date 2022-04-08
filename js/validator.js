@@ -1,4 +1,3 @@
-// import {showAlert} from './util.js';
 import {sendData} from './api.js';
 import {closePhotoModal} from './processing-modal.js';
 
@@ -43,7 +42,7 @@ const validateHashtag = (value) => {
   return true;
 };
 
-const initUploadWindow = (onSuccess, onFail) => {
+const initUploadWindow = () => {
   pristine.addValidator(
     form.querySelector('.text__hashtags'),
     validateTagsQuantity,
@@ -64,18 +63,16 @@ const initUploadWindow = (onSuccess, onFail) => {
       blockSubmitButton();
       sendData(
         () => {
-          onSuccess(() => {
-            successTemplate.cloneNode(true);
-            closePhotoModal();
-          });
+          closePhotoModal();
           unblockSubmitButton();
+          const message = successTemplate.cloneNode(true);
+          document.body.appendChild(message);
         },
         () => {
-          onFail(() => {
-            errorTemplate.cloneNode(true);
-            closePhotoModal();
-          });
+          closePhotoModal();
           unblockSubmitButton();
+          const message = errorTemplate.cloneNode(true);
+          document.body.appendChild(message);
         },
         new FormData(evt.target),
       );

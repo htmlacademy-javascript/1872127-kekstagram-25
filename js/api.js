@@ -1,5 +1,3 @@
-const errorTemplate = document.querySelector('#error').content;
-
 const getData = (onSuccess, onFail) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
@@ -23,9 +21,7 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail(() => {
-          errorTemplate.cloneNode(true);
-        });
+        onFail();
       }
     })
     .catch(() => {
