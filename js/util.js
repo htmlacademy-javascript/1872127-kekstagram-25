@@ -24,7 +24,7 @@ function isEnterKey (evt) {
   return evt.key === 'Enter';
 }
 
-export {getInteger, getRandomArrayElement, isEscapeKey, isEnterKey/*, showAlert*/};
+export {getInteger, getRandomArrayElement, isEscapeKey, isEnterKey};
 
 // Функция нахождения длины строки
 // const stringLength = (inputText, maxLength) => {

@@ -11,6 +11,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
+    // Для проверки работоспособности окна ошибки поменять 'kekstagram' на '404'
     'https://25.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
