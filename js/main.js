@@ -7,10 +7,9 @@ import {getData} from './api.js';
 renderModalPhotos();
 initUploadWindow();
 
-const PHOTOS_COUNT = 25;
-
 getData((photos) => {
-  renderPhotos(photos.slice(0, PHOTOS_COUNT));
+  renderPhotos(photos);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 },
 () => {},
 );
