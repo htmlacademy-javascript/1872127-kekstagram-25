@@ -1,28 +1,32 @@
-const getData = (onSuccess) => {
+const getData = (onSuccess, onFail) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
+    })
+    .catch(() => {
+      onFail();
     });
 };
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://25.javascript.pages.academy/404',
+    // Для проверки работоспособности окна ошибки поменять 'kekstagram' на '404'
+    'https://25.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
-      body: formData,
+      body,
     },
   )
     .then((response) => {
       if (response.ok) {
         onSuccess();
       } else {
-        showAlert('Не удалось отправить форму. Попробуйте еще раз');
+        onFail();
       }
     })
-    .catch((err) => {
-      showAlert('Не удалось отправить форму. Попробуйте еще раз');
+    .catch(() => {
+      onFail();
     });
 };
 
