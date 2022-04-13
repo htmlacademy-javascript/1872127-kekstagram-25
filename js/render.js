@@ -1,4 +1,5 @@
 import {openFullscreenPhoto} from './fullscreen-photo.js';
+import {debounce} from './util.js';
 const photoTemplate = document.body.querySelector('#picture').content.querySelector('.picture');
 const photoBox = document.body.querySelector('.pictures');
 
@@ -25,7 +26,6 @@ const renderPhotos = (photos) => {
   const photoFragment = document.createDocumentFragment();
   photos
     .slice(0, PHOTOS_COUNT)
-    .sort(comparePhotos)
     .forEach((item) => {
       photoFragment.appendChild(renderPhoto(item));
     });
@@ -35,34 +35,33 @@ const renderPhotos = (photos) => {
 function comparePhotos (photoA, photoB) {
   return photoB.comments.length - photoA.comments.length;
 }
-// надо ли удалять clearPhotos() и вместо него писать photoBox.innerHTML =''? Какая цель? В чем разница?
 const setDefaultClick = (photos) => {
-  document.querySelector('#filter-discussed').addEventListener('click', (evt) => {
+  document.querySelector('#filter-default').addEventListener('click', debounce((evt) => {
     document.querySelector('#filter-random').classList.remove('img-filters__button--active');
     document.querySelector('#filter-discussed').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     renderPhotos(photos);
-  });
+  }));
 };
 
 const setDiscussedClick = (photos) => {
-  document.querySelector('#filter-discussed').addEventListener('click', (evt) => {
+  document.querySelector('#filter-discussed').addEventListener('click', debounce((evt) => {
     document.querySelector('#filter-default').classList.remove('img-filters__button--active');
     document.querySelector('#filter-random').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
-    const mostCommented = photos.forEach(comparePhotos);
+    const mostCommented = photos.sort(comparePhotos);
     renderPhotos(mostCommented);
-  });
+  }));
 };
 
 const setRandomClick = (photos) => {
-  document.querySelector('#filter-random').addEventListener('click', (evt) => {
+  document.querySelector('#filter-random').addEventListener('click', debounce((evt) => {
     document.querySelector('#filter-discussed').classList.remove('img-filters__button--active');
-    document.querySelector('#filter-random').classList.remove('img-filters__button--active');
+    document.querySelector('#filter-default').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     const showRandomly = photos.sort(comparePhotos).slice(10);
     renderPhotos(showRandomly);
-  });
+  }));
 };
 
 export {renderPhotos, clearPhotos, setDiscussedClick, setRandomClick, setDefaultClick};
