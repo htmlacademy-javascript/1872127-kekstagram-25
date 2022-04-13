@@ -10,9 +10,9 @@ initUploadWindow();
 getData((photos) => {
   renderPhotos(photos);
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
-  setDefaultClick(() => renderPhotos(photos));
-  setDiscussedClick(() => renderPhotos(photos));
-  setRandomClick(() => renderPhotos(photos));
+  setDefaultClick(photos);
+  setDiscussedClick(photos);
+  setRandomClick(photos);
 },
 () => {},
 );
