@@ -1,4 +1,4 @@
-import {renderPhotos} from './render.js';
+import {renderPhotos, setDiscussedClick, setRandomClick, setDefaultClick} from './render.js';
 import {renderModalPhotos} from './processing-modal.js';
 import {initUploadWindow} from './validator.js';
 import './slider-photo.js';
@@ -7,10 +7,12 @@ import {getData} from './api.js';
 renderModalPhotos();
 initUploadWindow();
 
-const PHOTOS_COUNT = 25;
-
 getData((photos) => {
-  renderPhotos(photos.slice(0, PHOTOS_COUNT));
+  renderPhotos(photos);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+  setDefaultClick(() => renderPhotos(photos));
+  setDiscussedClick(() => renderPhotos(photos));
+  setRandomClick(() => renderPhotos(photos));
 },
 () => {},
 );
