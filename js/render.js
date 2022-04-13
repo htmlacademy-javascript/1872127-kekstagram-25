@@ -35,6 +35,7 @@ const renderPhotos = (photos) => {
 function comparePhotos (photoA, photoB) {
   return photoB.comments.length - photoA.comments.length;
 }
+
 const setDefaultClick = (photos) => {
   document.querySelector('#filter-default').addEventListener('click', debounce((evt) => {
     document.querySelector('#filter-random').classList.remove('img-filters__button--active');
@@ -49,7 +50,7 @@ const setDiscussedClick = (photos) => {
     document.querySelector('#filter-default').classList.remove('img-filters__button--active');
     document.querySelector('#filter-random').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
-    const mostCommented = photos.sort(comparePhotos);
+    const mostCommented = photos.slice().sort(comparePhotos);
     renderPhotos(mostCommented);
   }));
 };
@@ -59,7 +60,7 @@ const setRandomClick = (photos) => {
     document.querySelector('#filter-discussed').classList.remove('img-filters__button--active');
     document.querySelector('#filter-default').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
-    const showRandomly = photos.sort(comparePhotos).slice(10);
+    const showRandomly = photos.slice().sort(comparePhotos).slice(15);
     renderPhotos(showRandomly);
   }));
 };
