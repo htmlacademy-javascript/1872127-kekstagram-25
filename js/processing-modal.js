@@ -1,5 +1,5 @@
 import {isEscapeKey, isEnterKey} from './util.js';
-import {runDefaultScale} from './scale-photo.js';
+import {runDefaultScaleHandler} from './scale-photo.js';
 const pageBody = document.querySelector('body');
 const photoProcessing = document.querySelector('.img-upload__overlay');
 const photoProcessingOpen = document.querySelector('#upload-file');
@@ -8,44 +8,44 @@ const photoProcessingClose = document.querySelector('#upload-cancel');
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closePhotoModal();
+    closePhotoModalHandler();
   }
 };
 
-function openPhotoModal () {
+const openPhotoModalHandler = () => {
   photoProcessing.classList.remove('hidden');
   pageBody.classList.add('modal-open');
 
   // обработчик закрытия при нажатии ESC
   document.addEventListener('keydown', onPopupEscKeydown);
-}
+};
 
-function closePhotoModal () {
+const closePhotoModalHandler = () => {
   photoProcessing.classList.add('hidden');
   pageBody.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onPopupEscKeydown);
-}
+};
 
-const renderModalPhotos = () => {
+const onRenderModalPhotos = () => {
   // обработчик открытия:
   photoProcessingOpen.addEventListener('change', () => {
-    openPhotoModal();
-    runDefaultScale();
+    openPhotoModalHandler();
+    runDefaultScaleHandler();
   });
 
   // обработчик открытия при нажатии ENTER
   photoProcessingOpen.addEventListener('keydown', (evt) => {
     if (isEnterKey(evt)) {
-      openPhotoModal();
-      runDefaultScale();
+      openPhotoModalHandler();
+      runDefaultScaleHandler();
     }
   });
 
   // обработчик закрытия:
   photoProcessingClose.addEventListener('click', () => {
-    closePhotoModal();
+    closePhotoModalHandler();
   });
 };
 
-export {renderModalPhotos, onPopupEscKeydown, closePhotoModal};
+export {onRenderModalPhotos, onPopupEscKeydown, closePhotoModalHandler};
