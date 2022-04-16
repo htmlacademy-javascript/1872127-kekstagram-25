@@ -17,23 +17,24 @@ const onCommentAuthor = (comment) => {
   return commentElement;
 };
 
-const onPopupEscKeydown = (evt) => {
+function onPopupEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closePhotoHandler();
   }
-};
+}
 
-const closePhotoHandler = () => {
+function closePhotoHandler () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 const openPhotoHandler = (photo) => {
   bigPicture.querySelector('.big-picture__img img').src = photo.url;
   bigPicture.querySelector('.likes-count').textContent = photo.likes;
-  bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
+  const toShow = photo.comments.length > MAX_COMMENTS ? MAX_COMMENTS : photo.comments.length;
+  bigPicture.querySelector('.social__comment-count').textContent = `${toShow} из ${photo.comments.length} комментариев`;
   bigPicture.querySelector('.social__caption').textContent = photo.description;
 
   bigPicture.querySelector('.social__comment-count').classList.remove('hidden');
@@ -55,8 +56,11 @@ const openPhotoHandler = (photo) => {
 bigPicture.querySelector('.big-picture__cancel').addEventListener('click', closePhotoHandler);
 commentsLoader.addEventListener('click', () => {
   const renderedCommentsCount = bigPicture.querySelectorAll('.social__comment').length;
-  commentsList.append(...comments.slice(renderedCommentsCount, renderedCommentsCount + MAX_COMMENTS).map(onCommentAuthor));
-  if (renderedCommentsCount + MAX_COMMENTS >= comments.length) {
+  const nextStep = renderedCommentsCount + MAX_COMMENTS;
+  const toShow = nextStep > comments.length ? comments.length : nextStep;
+  bigPicture.querySelector('.social__comment-count').textContent = `${toShow} из ${comments.length} комментариев`;
+  commentsList.append(...comments.slice(renderedCommentsCount, nextStep).map(onCommentAuthor));
+  if (nextStep >= comments.length) {
     commentsLoader.classList.add('hidden');
   }
 });

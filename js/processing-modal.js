@@ -20,12 +20,12 @@ const openPhotoModalHandler = () => {
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-const closePhotoModalHandler = () => {
+function closePhotoModalHandler () {
   photoProcessing.classList.add('hidden');
   pageBody.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 const onRenderModalPhotos = () => {
   // обработчик открытия:
