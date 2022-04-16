@@ -66,7 +66,7 @@ const effectNames = {
   },
 };
 
-const setEffectLevel = (evt) => {
+const onSetEffectLevel = (evt) => {
   const effectName = evt.target.value;
   const effect = effectNames[effectName];
 
@@ -92,4 +92,4 @@ const setEffectLevel = (evt) => {
   });
 };
 
-effectControls.forEach((effectControl) => effectControl.addEventListener('change', setEffectLevel));
+effectControls.forEach((effectControl) => effectControl.addEventListener('change', onSetEffectLevel));

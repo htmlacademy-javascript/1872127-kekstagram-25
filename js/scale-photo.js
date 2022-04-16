@@ -1,34 +1,35 @@
+const SCALE_MIN = 0.25;
+const SCALE_MAX = 1;
+const SCALE_STEP = 0.25;
+const SCALE_DEFAULT = 100;
+const IS_HUNDRED = 100;
+
 const controlSmaller = document.querySelector('.scale__control--smaller');
 const controlBigger = document.querySelector('.scale__control--bigger');
 const controlValue = document.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
-const SCALE_MIN = 0.25;
-const SCALE_MAX = 1;
-const SCALE_STEP = 0.25;
-const SCALE_DEFAULT = 100;
-
-const runDefaultScale = () => {
+const runDefaultScaleHandler = () => {
   controlValue.value = `${SCALE_DEFAULT}%`;
   imgUploadPreview.style.transform = 'scale(1)';
 };
 
 controlSmaller.addEventListener('click', () => {
   const value = Number(controlValue.value.replace('%', ''));
-  if ((value / 100) !== SCALE_MIN) {
-    const amount = value / 100 - SCALE_STEP;
+  if ((value / IS_HUNDRED) !== SCALE_MIN) {
+    const amount = value / IS_HUNDRED - SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${amount})`;
-    controlValue.value = `${amount * 100}%`;
+    controlValue.value = `${amount * IS_HUNDRED}%`;
   }
 });
 
 controlBigger.addEventListener('click', () => {
   const value = Number(controlValue.value.replace('%', ''));
-  if ((value / 100) !== SCALE_MAX) {
-    const amount = value / 100 + SCALE_STEP;
+  if ((value / IS_HUNDRED) !== SCALE_MAX) {
+    const amount = value / IS_HUNDRED + SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${amount})`;
-    controlValue.value = `${amount * 100}%`;
+    controlValue.value = `${amount * IS_HUNDRED}%`;
   }
 });
 
-export {runDefaultScale};
+export {runDefaultScaleHandler};
